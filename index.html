@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Typespeed</title>
         <link rel="stylesheet" href="style/style.css" />
+        <link rel="stylesheet" href="style/modal.css" />
         <script src="https://unpkg.com/feather-icons"></script>
     </head>
     <body>
@@ -46,7 +47,7 @@
             </div>
         </div>
 
-        <div class="modal" id="highscores" aria-label="Your Highscores">
+        <div class="modal" id="about" aria-label="About this Project">
             <div class="modal__content">
                 <button class="modal__close modal__close-icon">&times;</button>
                 <h1>About</h1>
@@ -73,10 +74,27 @@
                         >LICENSE</a
                     >)
                 </p>
+                <p>
+                    <a
+                        href="https://github.com/umcconnell/modal"
+                        target="_blank"
+                        >Modal</a
+                    >
+                    by Ulysse McConnell (<a
+                        href="https://github.com/umcconnell/modal/blob/master/LICENSE.md"
+                        target="_blank"
+                        >LICENSE</a
+                    >)
+                </p>
             </div>
         </div>
 
         <script type="module">
+            import Modal from "./script/modal.js";
+
+            let highscores = new Modal("#highscores"),
+                about = new Modal("#about");
+
             feather.replace();
         </script>
     </body>
