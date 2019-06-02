@@ -37,7 +37,33 @@
             </svg>
         </a>
 
-        <main></main>
+        <main>
+            <canvas id="canvas"
+                >Sorry. Your Browser does not support the canvas element. Try
+                updating your browser.</canvas
+            >
+            <div class="controls">
+                <button class="btn" id="play">
+                    <i data-feather="play" aria-hidden="true"></i>
+                    <span class="visually-hidden">Start the game</span>
+                </button>
+                <input
+                    type="text"
+                    id="input"
+                    class="input"
+                    placeholder="Type here..."
+                    aria-label="Type here"
+                />
+                <button class="btn" id="highscore">
+                    <i data-feather="award" aria-hidden="true"></i>
+                    <span class="visually-hidden">Your highscores</span>
+                </button>
+                <button class="btn" id="info">
+                    <i data-feather="info" aria-hidden="true"></i>
+                    <span class="visually-hidden">About this project</span>
+                </button>
+            </div>
+        </main>
 
         <div class="modal" id="highscores" aria-label="Your Highscores">
             <div class="modal__content">
@@ -94,6 +120,13 @@
 
             let highscores = new Modal("#highscores"),
                 about = new Modal("#about");
+
+            let playBtn = document.getElementById("play"),
+                highscoreBtn = document.getElementById("highscore"),
+                aboutBtn = document.getElementById("info");
+
+            highscoreBtn.addEventListener("click", () => highscores.open());
+            aboutBtn.addEventListener("click", () => about.open());
 
             feather.replace();
         </script>
