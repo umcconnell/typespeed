@@ -17,8 +17,9 @@ function addBackdrop(modal) {
 function bindEvents(Modal) {
     let focusElements = focusableElements(Modal.modal);
 
-    Modal.firstFocusElement = focusElements[0];
-    Modal.lastFocusElement = focusElements[focusElements.length - 1];
+    Modal.firstFocusElement = focusElements[0] || Modal.modal;
+    Modal.lastFocusElement =
+        focusElements[focusElements.length - 1] || Modal.modal;
 
     Modal.modal.addEventListener(
         "click",
@@ -34,10 +35,18 @@ function bindEvents(Modal) {
         else if (e.key === "Escape") {
             Modal.close();
         } else if (e.key === "Tab") {
-            if (e.shiftKey && e.target === Modal.firstFocusElement) {
+            if (
+                e.shiftKey &&
+                (e.target === Modal.firstFocusElement ||
+                    e.target === Modal.modal)
+            ) {
                 Modal.lastFocusElement.focus();
                 e.preventDefault();
-            } else if (!e.shiftKey && e.target === Modal.lastFocusElement) {
+            } else if (
+                !e.shiftKey &&
+                (e.target === Modal.lastFocusElement ||
+                    e.target === Modal.modal)
+            ) {
                 Modal.firstFocusElement.focus();
                 e.preventDefault();
             }
