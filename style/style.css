@@ -81,7 +81,8 @@ body {
     margin: 0 var(--spacing);
 }
 
-.github-corner:hover .octo-arm {
+.github-corner:hover .octo-arm,
+.github-corner:focus .octo-arm {
     animation: octocat-wave 560ms ease-in-out;
 }
 
@@ -103,7 +104,8 @@ body {
 
 /* @media rules*/
 @media (max-width: 500px) {
-    .github-corner:hover .octo-arm {
+    .github-corner:hover .octo-arm,
+    .github-corner:focus .octo-arm {
         animation: none;
     }
     .github-corner .octo-arm {
