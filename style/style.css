@@ -28,6 +28,43 @@ body {
     clip: rect(1px, 1px, 1px, 1px);
 }
 
+.btn,
+.input {
+    font-size: 1em;
+    padding: 0.75em 1em;
+    background-color: #fff;
+    border: 2px solid transparent;
+    border-radius: 0.4em;
+}
+
+.btn {
+    line-height: 0.8em;
+    cursor: pointer;
+}
+
+.input {
+    padding-left: 0.9em;
+    padding-right: 0.9em;
+    border: 2px solid #ddd;
+    text-align: center;
+    width: 36%;
+    min-width: 18em;
+}
+
+.btn:hover {
+    color: var(--main-color);
+}
+
+.btn:focus {
+    background-color: var(--main-color);
+    color: #fff;
+}
+
+.input:hover,
+.input:focus {
+    border-color: var(--main-color);
+}
+
 .controls {
     --spacing: 10px;
     --height: 100px;
