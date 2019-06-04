@@ -33,6 +33,7 @@ body {
     display: -ms-flexbox;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     margin: 0 calc(-1 * var(--spacing));
 }
 
