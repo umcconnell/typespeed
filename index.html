@@ -117,6 +117,7 @@
 
         <script type="module">
             import Modal from "./script/modal.js";
+            import { setupCanvas } from "./script/script.js";
 
             let highscores = new Modal("#highscores"),
                 about = new Modal("#about");
@@ -125,10 +126,14 @@
                 highscoreBtn = document.getElementById("highscore"),
                 aboutBtn = document.getElementById("info");
 
+            let canvas = document.getElementById("canvas");
+
             highscoreBtn.addEventListener("click", () => highscores.open());
             aboutBtn.addEventListener("click", () => about.open());
 
             feather.replace();
+
+            setupCanvas(canvas);
         </script>
     </body>
 </html>
