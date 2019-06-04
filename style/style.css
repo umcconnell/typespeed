@@ -67,11 +67,11 @@ body {
 
 .controls {
     --spacing: 10px;
-    --height: 100px;
+    --height: 95px;
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     height: var(--height);
     margin: 0 calc(-1 * var(--spacing));
