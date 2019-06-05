@@ -1,6 +1,6 @@
 .modal,
 .modal__backdrop {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
@@ -81,14 +81,6 @@
 .modal.open > .modal__content {
     transform: translate(0);
     opacity: 1;
-}
-
-main {
-    transition: transform 0.3s;
-}
-
-body.modal-open main {
-    transform: scale(0.97);
 }
 
 @media screen and (max-width: 700px) {
