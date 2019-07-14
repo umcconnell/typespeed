@@ -1,4 +1,4 @@
-import { fetchWords } from "./api.js";
+import { fetchWords, changeFetchWordStatus } from "./api.js";
 
 export function setupCanvas(canvas) {
     let [width, height] = [window.innerWidth, window.innerHeight - 100];
