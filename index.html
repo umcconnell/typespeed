@@ -118,8 +118,10 @@
         <script type="module">
             import Modal from "./script/modal.js";
             import { setupCanvas } from "./script/script.js";
+            import { formatHighscore } from "./script/helpers.js";
 
             let highscores = new Modal("#highscores"),
+                highscoreList = document.getElementById("highscore-list"),
                 about = new Modal("#about");
 
             let playBtn = document.getElementById("play"),
@@ -128,7 +130,15 @@
 
             let canvas = document.getElementById("canvas");
 
-            highscoreBtn.addEventListener("click", () => highscores.open());
+            highscoreBtn.addEventListener("click", () => {
+                if (localStorage.highscores) {
+                    highscoreList.innerHTML = JSON.parse(localStorage)
+                        .map(formatHighscore)
+                        .map(score => `<li>${score}</li>`)
+                        .join("");
+                }
+                highscores.open();
+            });
             aboutBtn.addEventListener("click", () => about.open());
 
             feather.replace();
