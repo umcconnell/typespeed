@@ -26,3 +26,7 @@ export function formatDate(date) {
         months[date.getMonth()]
     } ${date.getDate()}, ${date.getFullYear()}`;
 }
+
+export function formatHighscore(highscore) {
+    return `${highscore.score} &mdash; <em>${highscore.date}</em>`;
+}
