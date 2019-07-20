@@ -1,8 +1,8 @@
 import { fetchWords, changeFetchWordStatus } from "./api.js";
-import { canvasEnv, gameEnv } from "./config.js";
+import { canvasEnv, gameEnv, config, callbacks } from "./config.js";
 import { draw } from "./gameLogic.js";
 
-export function setupCanvas(canvas) {
+function setupCanvas(canvas) {
     let [width, height] = [window.innerWidth, window.innerHeight - 100];
 
     canvas.width = width;
@@ -14,6 +14,26 @@ export function setupCanvas(canvas) {
     canvasEnv.height = height;
 
     return [width, height];
+}
+
+export function setup(canvas, settings = {}, cbs = {}) {
+    Object.assign(config, settings);
+    Object.assign(callbacks, cbs);
+
+    gameEnv.verticalSpeed = config.initialVerticalSpeed;
+    gameEnv.wordAppearDelay = config.initialWordAppearDelay;
+
+    setupCanvas(
+        canvas instanceof Element ? canvas : document.querySelector(canvas)
+    );
+
+    fetchWords()
+        .then(words => {
+            changeFetchWordStatus();
+            return words;
+        })
+        .then(words => (gameEnv.availableWords = words))
+        .catch(callbacks.error);
 }
 
 export function play() {
