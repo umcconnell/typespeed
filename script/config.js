@@ -34,3 +34,8 @@ export let config = {
     fontFamily: "auto",
     fontSize: "auto"
 };
+
+export let callbacks = {
+    error: console.error,
+    gameOver: () => alert("Game Over")
+};
