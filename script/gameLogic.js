@@ -40,7 +40,7 @@ export class ActiveWord {
                 word => Math.abs(word.y - y) <= 10 && word.x < 100
             )
         ) {
-            y = randomRange(40 + this.fontSize, height - 10);
+            y = randomInRange(40 + this.fontSize, canvasEnv.height - 10);
         }
         this.y = y;
     }
@@ -72,7 +72,7 @@ export function increaseDifficulty() {
     if (gameEnv.score > 29) {
         // Decrease wordDistance every 30 points of score
         let closest30Power = Math.abs(Math.ceil((gameEnv.score - 29) / 30));
-        wordDistance = Math.max(
+        gameEnv.wordAppearDelay = Math.max(
             50,
             config.initialWordAppearDelay -
                 config.wordAppearDelayDecrease * closest30Power
@@ -82,7 +82,7 @@ export function increaseDifficulty() {
     if (gameEnv.score > 600) {
         gameEnv.verticalSpeed =
             config.initialVerticalSpeed *
-            (Math.abs(Math.ceil((score - 399) / 400)) + 1);
+            (Math.abs(Math.ceil((gameEnv.score - 399) / 400)) + 1);
     }
 }
 

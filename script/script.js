@@ -55,7 +55,7 @@ export function guessWord(guess) {
     }
 
     gameEnv.score += guessResults
-        .map(({ x }) => Math.round(((width / x) * guess.length) / 2))
+        .map(({ x }) => Math.round(((canvasEnv.width / x) * guess.length) / 2))
         .reduce((acc, curr) => acc + curr, 0);
 
     // Was a word correctly guessed
