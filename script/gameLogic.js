@@ -67,6 +67,24 @@ export function collisionDetection() {
     if (lives <= 0) gameOver();
 }
 
+export function increaseDifficulty() {
+    if (gameEnv.score > 29) {
+        // Decrease wordDistance every 30 points of score
+        let closest30Power = Math.abs(Math.ceil((gameEnv.score - 29) / 30));
+        wordDistance = Math.max(
+            50,
+            config.initialWordAppearDelay -
+                config.wordAppearDelayDecrease * closest30Power
+        );
+    }
+
+    if (score > 600) {
+        gameEnv.verticalSpeed =
+            config.initialVerticalSpeed *
+            (Math.abs(Math.ceil((score - 399) / 400)) + 1);
+    }
+}
+
 export function populateWord() {
     if (
         gameEnv.currWordAppearDelay >= gameEnv.wordAppearDelay ||
@@ -112,6 +130,7 @@ export function draw() {
     drawScore();
     populateWord();
     updateWordPositions();
+    increaseDifficulty();
 
     canvasEnv.animationFrame = requestAnimationFrame(draw);
 }
