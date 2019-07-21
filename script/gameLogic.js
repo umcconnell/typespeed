@@ -48,10 +48,21 @@ export function drawWords() {
     return gameEnv.activeWords.forEach(word => word.render());
 }
 
+export function drawLives() {
+    canvasEnv.ctx.font = "bold 16px sans-serif";
+    canvasEnv.ctx.fillText(
+        `${Math.max(0, gameEnv.lives)} Lives`,
+        canvasEnv.width - 120,
+        24
+    );
+    canvasEnv.ctx.font = "";
+}
+
 export function draw() {
     canvasEnv.ctx.clearRect(0, 0, canvasEnv.width, canvasEnv.height);
 
     drawWords();
+    drawLives();
 
     canvasEnv.animationFrame = requestAnimationFrame(draw);
 }
