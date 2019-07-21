@@ -43,3 +43,21 @@ export function pause() {
     canvasEnv.animationFrame = cancelAnimationFrame(canvasEnv.animationFrame);
     gameEnv.isPaused = true;
 }
+
+export function guessWord(guess) {
+    if (gameEnv.paused) return false;
+    let guessResults = gameEnv.activeWords.filter(word => word.text === guess);
+    // Remove right guesses from activeWords
+    if (guessResults.length > 0) {
+        gameEnv.activeWords = gameEnv.activeWords.filter(
+            word => word.text !== guess
+        );
+    }
+
+    gameEnv.score += guessResults
+        .map(({ x }) => Math.round(((width / x) * guess.length) / 2))
+        .reduce((acc, curr) => acc + curr, 0);
+
+    // Was a word correctly guessed
+    return guessResults.length > 0;
+}
