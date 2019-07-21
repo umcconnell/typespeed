@@ -44,8 +44,14 @@ export class ActiveWord {
     }
 }
 
+export function drawWords() {
+    return gameEnv.activeWords.forEach(word => word.render());
+}
+
 export function draw() {
     canvasEnv.ctx.clearRect(0, 0, canvasEnv.width, canvasEnv.height);
+
+    drawWords();
 
     canvasEnv.animationFrame = requestAnimationFrame(draw);
 }
