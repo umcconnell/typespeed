@@ -58,11 +58,18 @@ export function drawLives() {
     canvasEnv.ctx.font = "";
 }
 
+export function drawScore() {
+    canvasEnv.ctx.font = "bold 16px sans-serif";
+    canvasEnv.ctx.fillText(`Score: ${gameEnv.score}`, 20, 24);
+    canvasEnv.ctx.font = "";
+}
+
 export function draw() {
     canvasEnv.ctx.clearRect(0, 0, canvasEnv.width, canvasEnv.height);
 
     drawWords();
     drawLives();
+    drawScore();
 
     canvasEnv.animationFrame = requestAnimationFrame(draw);
 }
