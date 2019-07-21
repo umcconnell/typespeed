@@ -28,11 +28,8 @@ export function setup(canvas, settings = {}, cbs = {}) {
     );
 
     fetchWords()
-        .then(words => {
-            changeFetchWordStatus();
-            return words;
-        })
         .then(words => (gameEnv.availableWords = words))
+        .then(changeFetchWordStatus)
         .catch(callbacks.error);
 }
 
