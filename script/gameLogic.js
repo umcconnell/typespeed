@@ -6,7 +6,7 @@ import {
     callbacks
 } from "./config.js";
 import { randomElement, randomInRange } from "./helpers.js";
-import { fetchWords, changeFetchWordStatus } from "./api.js";
+import { fetchWords } from "./api.js";
 import { pause } from "./script.js";
 
 export class ActiveWord {
@@ -124,9 +124,7 @@ export function drawScore() {
 
 export function fetchNewWords() {
     if (gameEnv.availableWords.length < 20) {
-        return fetchWords()
-            .then(words => gameEnv.availableWords.push(words))
-            .then(changeFetchWordStatus);
+        return fetchWords();
     }
 }
 

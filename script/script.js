@@ -1,4 +1,4 @@
-import { fetchWords, changeFetchWordStatus } from "./api.js";
+import { fetchWords } from "./api.js";
 import { canvasEnv, gameEnv, config, callbacks } from "./config.js";
 import { draw } from "./gameLogic.js";
 
@@ -27,10 +27,7 @@ export function setup(canvas, settings = {}, cbs = {}) {
         canvas instanceof Element ? canvas : document.querySelector(canvas)
     );
 
-    fetchWords()
-        .then(words => (gameEnv.availableWords = words))
-        .then(changeFetchWordStatus)
-        .catch(callbacks.error);
+    fetchWords();
 }
 
 export function play() {
