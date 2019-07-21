@@ -6,6 +6,7 @@ import {
     callbacks
 } from "./config.js";
 import { randomElement, randomInRange } from "./helpers.js";
+import { fetchWords, changeFetchWordStatus } from "./api.js";
 import { pause } from "./script.js";
 
 export class ActiveWord {
@@ -121,6 +122,14 @@ export function drawScore() {
     canvasEnv.ctx.font = "";
 }
 
+export function fetchNewWords() {
+    if (gameEnv.availableWords.length < 20) {
+        return fetchWords()
+            .then(words => gameEnv.availableWords.push(words))
+            .then(changeFetchWordStatus);
+    }
+}
+
 export function draw() {
     canvasEnv.ctx.clearRect(0, 0, canvasEnv.width, canvasEnv.height);
 
@@ -131,6 +140,8 @@ export function draw() {
     populateWord();
     updateWordPositions();
     increaseDifficulty();
+
+    fetchNewWords();
 
     canvasEnv.animationFrame = requestAnimationFrame(draw);
 }
