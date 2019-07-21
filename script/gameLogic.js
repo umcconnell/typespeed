@@ -61,11 +61,11 @@ export function collisionDetection() {
     let nonColliding = gameEnv.activeWords.filter(
         word => word.x + word.width < canvasEnv.width
     );
-    lives -= gameEnv.activeWords.length - nonColliding.length;
+    gameEnv.lives -= gameEnv.activeWords.length - nonColliding.length;
 
     gameEnv.activeWords = nonColliding;
 
-    if (lives <= 0) gameOver();
+    if (gameEnv.lives <= 0) gameOver();
 }
 
 export function increaseDifficulty() {
@@ -79,7 +79,7 @@ export function increaseDifficulty() {
         );
     }
 
-    if (score > 600) {
+    if (gameEnv.score > 600) {
         gameEnv.verticalSpeed =
             config.initialVerticalSpeed *
             (Math.abs(Math.ceil((score - 399) / 400)) + 1);
@@ -138,6 +138,7 @@ export function draw() {
     populateWord();
     updateWordPositions();
     increaseDifficulty();
+    gameEnv.currWordAppearDelay++;
 
     fetchNewWords();
 
