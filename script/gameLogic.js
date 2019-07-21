@@ -56,6 +56,17 @@ export function gameOver() {
     callbacks.gameOver();
 }
 
+export function collisionDetection() {
+    let nonColliding = gameEnv.activeWords.filter(
+        word => word.x + word.width < canvasEnv.width
+    );
+    lives -= gameEnv.activeWords.length - nonColliding.length;
+
+    gameEnv.activeWords = nonColliding;
+
+    if (lives <= 0) gameOver();
+}
+
 export function populateWord() {
     if (
         gameEnv.currWordAppearDelay >= gameEnv.wordAppearDelay ||
@@ -96,6 +107,7 @@ export function draw() {
     canvasEnv.ctx.clearRect(0, 0, canvasEnv.width, canvasEnv.height);
 
     drawWords();
+    collisionDetection();
     drawLives();
     drawScore();
     populateWord();
