@@ -68,6 +68,10 @@ export function populateWord() {
     }
 }
 
+export function updateWordPositions() {
+    gameEnv.activeWords.forEach(word => (word.x += gameEnv.verticalSpeed));
+}
+
 export function drawWords() {
     return gameEnv.activeWords.forEach(word => word.render());
 }
@@ -95,6 +99,7 @@ export function draw() {
     drawLives();
     drawScore();
     populateWord();
+    updateWordPositions();
 
     canvasEnv.animationFrame = requestAnimationFrame(draw);
 }
