@@ -1,5 +1,12 @@
-import { canvasEnv, config, fontFamilies, gameEnv } from "./config.js";
+import {
+    canvasEnv,
+    config,
+    fontFamilies,
+    gameEnv,
+    callbacks
+} from "./config.js";
 import { randomElement, randomInRange } from "./helpers.js";
+import { pause } from "./script.js";
 
 export class ActiveWord {
     constructor(word) {
@@ -42,6 +49,11 @@ export class ActiveWord {
         canvasEnv.ctx.fillText(this.text, this.x, this.y);
         canvasEnv.ctx.font = "";
     }
+}
+
+export function gameOver() {
+    pause();
+    callbacks.gameOver();
 }
 
 export function drawWords() {
