@@ -56,6 +56,18 @@ export function gameOver() {
     callbacks.gameOver();
 }
 
+export function populateWord() {
+    if (
+        gameEnv.currWordAppearDelay >= gameEnv.wordAppearDelay ||
+        gameEnv.activeWords.length < 1
+    ) {
+        gameEnv.currWordAppearDelay = 0;
+        gameEnv.activeWords.push(
+            new ActiveWord(gameEnv.availableWords.shift())
+        );
+    }
+}
+
 export function drawWords() {
     return gameEnv.activeWords.forEach(word => word.render());
 }
@@ -82,6 +94,7 @@ export function draw() {
     drawWords();
     drawLives();
     drawScore();
+    populateWord();
 
     canvasEnv.animationFrame = requestAnimationFrame(draw);
 }
