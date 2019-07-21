@@ -148,7 +148,8 @@
 
         <script type="module">
             import Modal from "./script/modal.js";
-            import { setup, play, pause } from "./script/script.js";
+            import { setup, play, pause, guessWord } from "./script/script.js";
+            import { gameEnv } from "./script/config.js";
             import { formatHighscore } from "./script/helpers.js";
 
             let highscores = new Modal("#highscores"),
@@ -157,9 +158,19 @@
 
             let playBtn = document.getElementById("play"),
                 highscoreBtn = document.getElementById("highscore"),
-                aboutBtn = document.getElementById("info");
+                aboutBtn = document.getElementById("info"),
+                input = document.getElementById("input");
 
             let canvas = document.getElementById("canvas");
+
+            function fillPlayBtn() {
+                let icon = feather.icons[gameEnv.isPaused ? "play" : "pause"];
+                icon.attrs["aria-hidden"] = true;
+
+                playBtn.innerHTML = `${icon.toSvg()}<span class="visually-hidden">${
+                    gameEnv.isPaused ? "Start" : "Pause"
+                } the game</span>`;
+            }
 
             highscoreBtn.addEventListener("click", () => {
                 if (localStorage.highscores) {
@@ -170,7 +181,14 @@
                 }
                 highscores.open();
             });
+
             aboutBtn.addEventListener("click", () => about.open());
+
+            playBtn.addEventListener("click", () => {
+                input.disabled = !gameEnv.isPaused;
+                gameEnv.isPaused ? input.focus() || play() : pause();
+                fillPlayBtn();
+            });
 
             feather.replace();
 
