@@ -172,6 +172,11 @@
                 } the game</span>`;
             }
 
+            function errorAnimation(el) {
+                el.classList.add("error");
+                return setTimeout(() => el.classList.remove("error"), 1000);
+            }
+
             highscoreBtn.addEventListener("click", () => {
                 if (localStorage.highscores) {
                     highscoreList.innerHTML = JSON.parse(localStorage)
@@ -188,6 +193,13 @@
                 input.disabled = !gameEnv.isPaused;
                 gameEnv.isPaused ? input.focus() || play() : pause();
                 fillPlayBtn();
+            });
+
+            input.addEventListener("keydown", ({ key }) => {
+                if (key === "Enter") {
+                    let correct = guessWord(input.value);
+                    correct ? (input.value = "") : errorAnimation(input);
+                }
             });
 
             feather.replace();
