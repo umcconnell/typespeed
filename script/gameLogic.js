@@ -7,7 +7,7 @@ import {
 } from "./config.js";
 import { randomElement, randomInRange } from "./helpers.js";
 import { fetchWords } from "./api.js";
-import { pause } from "./script.js";
+import { pause, setup } from "./script.js";
 
 export class ActiveWord {
     constructor(word) {
@@ -54,7 +54,14 @@ export class ActiveWord {
 
 export function gameOver() {
     pause();
-    callbacks.gameOver();
+    canvasEnv.ctx.clearRect(0, 0, canvasEnv.width, canvasEnv.height);
+    callbacks.gameOver(gameEnv.score);
+
+    gameEnv.score = 0;
+    gameEnv.lives = 3;
+    gameEnv.activeWords = [];
+
+    setup(canvasEnv.canvas);
 }
 
 export function collisionDetection() {
@@ -129,18 +136,18 @@ export function fetchNewWords() {
 }
 
 export function draw() {
+    canvasEnv.animationFrame = requestAnimationFrame(draw);
+
     canvasEnv.ctx.clearRect(0, 0, canvasEnv.width, canvasEnv.height);
 
     drawWords();
-    collisionDetection();
     drawLives();
     drawScore();
+    collisionDetection();
     populateWord();
     updateWordPositions();
     increaseDifficulty();
     gameEnv.currWordAppearDelay++;
 
     fetchNewWords();
-
-    canvasEnv.animationFrame = requestAnimationFrame(draw);
 }
