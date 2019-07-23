@@ -2,7 +2,7 @@ import { fetchWords } from "./api.js";
 import { canvasEnv, gameEnv, config, callbacks } from "./config.js";
 import { draw, populateWord } from "./gameLogic.js";
 
-function setupCanvas(canvas) {
+export function setupCanvas(canvas) {
     let [width, height] = [window.innerWidth, window.innerHeight - 100];
 
     canvas.width = width;
