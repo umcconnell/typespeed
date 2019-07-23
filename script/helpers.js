@@ -30,3 +30,11 @@ export function formatDate(date) {
 export function formatHighscore(highscore) {
     return `${highscore.score} &mdash; <em>${highscore.date}</em>`;
 }
+
+export function sortBy(field, ascending = true) {
+    return function(array) {
+        return array.sort((a, b) =>
+            ascending ? a[field] - b[field] : b[field] - a[field]
+        );
+    };
+}
