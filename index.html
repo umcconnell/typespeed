@@ -69,7 +69,7 @@
             <div class="modal__content">
                 <button class="modal__close modal__close-icon">&times;</button>
                 <h2>Highscores</h2>
-                <ul id="highscore-list"></ul>
+                <ul id="highscore-list" class="list--none"></ul>
             </div>
         </div>
 
@@ -150,7 +150,11 @@
             import Modal from "./script/modal.js";
             import { setup, play, pause, guessWord } from "./script/script.js";
             import { gameEnv } from "./script/config.js";
-            import { formatHighscore } from "./script/helpers.js";
+            import {
+                formatHighscore,
+                formatDate,
+                sortBy
+            } from "./script/helpers.js";
 
             let highscores = new Modal("#highscores"),
                 highscoreList = document.getElementById("highscore-list"),
@@ -162,6 +166,8 @@
                 input = document.getElementById("input");
 
             let canvas = document.getElementById("canvas");
+
+            let sortHighscores = sortBy("score", false);
 
             function fillPlayBtn() {
                 let icon = feather.icons[gameEnv.isPaused ? "play" : "pause"];
@@ -179,7 +185,9 @@
 
             highscoreBtn.addEventListener("click", () => {
                 if (localStorage.highscores) {
-                    highscoreList.innerHTML = JSON.parse(localStorage)
+                    highscoreList.innerHTML = JSON.parse(
+                        localStorage.getItem("highscores")
+                    )
                         .map(formatHighscore)
                         .map(score => `<li>${score}</li>`)
                         .join("");
@@ -204,7 +212,29 @@
 
             feather.replace();
 
-            setup(canvas);
+            setup(
+                canvas,
+                {},
+                {
+                    gameOver: score => {
+                        let highscores =
+                            JSON.parse(localStorage.getItem("highscores")) ||
+                            [];
+
+                        localStorage.setItem(
+                            "highscores",
+                            JSON.stringify(
+                                sortHighscores(
+                                    highscores.concat({
+                                        score,
+                                        date: formatDate(new Date())
+                                    })
+                                ).slice(0, 10)
+                            )
+                        );
+                    }
+                }
+            );
         </script>
     </body>
 </html>
