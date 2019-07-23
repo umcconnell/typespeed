@@ -156,7 +156,13 @@
 
         <script type="module">
             import Modal from "./script/modal.js";
-            import { setup, play, pause, guessWord } from "./script/script.js";
+            import {
+                setup,
+                setupCanvas,
+                play,
+                pause,
+                guessWord
+            } from "./script/script.js";
             import { gameEnv } from "./script/config.js";
             import {
                 formatHighscore,
@@ -212,6 +218,8 @@
                     correct ? (input.value = "") : errorAnimation(input);
                 }
             });
+
+            window.addEventListener("resize", () => setupCanvas(canvas));
 
             feather.replace();
 
