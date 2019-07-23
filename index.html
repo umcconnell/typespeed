@@ -65,6 +65,14 @@
             </div>
         </main>
 
+        <div class="modal" id="gameOver" aria-label="Game Over">
+            <div class="modal__content">
+                <button class="modal__close modal__close-icon">&times;</button>
+                <h2>Game Over!</h2>
+                <p>Your score: <span id="gameOverScore"></span></p>
+            </div>
+        </div>
+
         <div class="modal" id="highscores" aria-label="Your Highscores">
             <div class="modal__content">
                 <button class="modal__close modal__close-icon">&times;</button>
@@ -158,6 +166,8 @@
 
             let highscores = new Modal("#highscores"),
                 highscoreList = document.getElementById("highscore-list"),
+                gameOver = new Modal("#gameOver"),
+                gameOverScore = document.getElementById("gameOverScore"),
                 about = new Modal("#about");
 
             let playBtn = document.getElementById("play"),
@@ -220,6 +230,10 @@
                         );
 
                         fillPlayBtn();
+
+                        gameOverScore.innerText = score;
+                        input.value = "";
+                        gameOver.open();
                     }
                 }
             );
