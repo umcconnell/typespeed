@@ -150,7 +150,11 @@
             import Modal from "./script/modal.js";
             import { setup, play, pause, guessWord } from "./script/script.js";
             import { gameEnv } from "./script/config.js";
-            import { formatHighscore, addHighscore } from "./script/helpers.js";
+            import {
+                formatHighscore,
+                addHighscore,
+                errorAnimation
+            } from "./script/helpers.js";
 
             let highscores = new Modal("#highscores"),
                 highscoreList = document.getElementById("highscore-list"),
@@ -170,11 +174,6 @@
                 playBtn.innerHTML = `${icon.toSvg()}<span class="visually-hidden">${
                     gameEnv.isPaused ? "Start" : "Pause"
                 } the game</span>`;
-            }
-
-            function errorAnimation(el) {
-                el.classList.add("error");
-                return setTimeout(() => el.classList.remove("error"), 1000);
             }
 
             highscoreBtn.addEventListener("click", () => {

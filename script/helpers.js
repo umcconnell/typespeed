@@ -48,3 +48,8 @@ export function addHighscore(highscores, score) {
         })
     ).slice(0, 10);
 }
+
+export function errorAnimation(el, className = "error", time = 1000) {
+    el.classList.add(className);
+    return setTimeout(() => el.classList.remove(className), time);
+}
