@@ -150,11 +150,7 @@
             import Modal from "./script/modal.js";
             import { setup, play, pause, guessWord } from "./script/script.js";
             import { gameEnv } from "./script/config.js";
-            import {
-                formatHighscore,
-                formatDate,
-                sortBy
-            } from "./script/helpers.js";
+            import { formatHighscore, addHighscore } from "./script/helpers.js";
 
             let highscores = new Modal("#highscores"),
                 highscoreList = document.getElementById("highscore-list"),
@@ -166,8 +162,6 @@
                 input = document.getElementById("input");
 
             let canvas = document.getElementById("canvas");
-
-            let sortHighscores = sortBy("score", false);
 
             function fillPlayBtn() {
                 let icon = feather.icons[gameEnv.isPaused ? "play" : "pause"];
@@ -223,14 +217,7 @@
 
                         localStorage.setItem(
                             "highscores",
-                            JSON.stringify(
-                                sortHighscores(
-                                    highscores.concat({
-                                        score,
-                                        date: formatDate(new Date())
-                                    })
-                                ).slice(0, 10)
-                            )
+                            JSON.stringify(addHighscore(highscores, score))
                         );
                     }
                 }

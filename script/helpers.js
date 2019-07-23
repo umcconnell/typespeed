@@ -38,3 +38,13 @@ export function formatDate(date) {
 export function formatHighscore(highscore) {
     return `${highscore.score} &mdash; <em>${highscore.date}</em>`;
 }
+
+let sortHighscores = sortBy("score", false);
+export function addHighscore(highscores, score) {
+    return sortHighscores(
+        highscores.concat({
+            score,
+            date: formatDate(new Date())
+        })
+    ).slice(0, 10);
+}
