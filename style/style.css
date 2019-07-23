@@ -33,6 +33,11 @@ body {
     border-color: red !important;
 }
 
+.list--none {
+    padding: 0;
+    list-style-type: none;
+}
+
 .btn,
 .input {
     font-size: 1em;
