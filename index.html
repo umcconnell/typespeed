@@ -6,6 +6,7 @@
         <title>Typespeed</title>
         <link rel="stylesheet" href="style/style.css" />
         <link rel="stylesheet" href="style/modal.css" />
+        <link rel="stylesheet" href="style/snackbar.css" />
         <script src="https://unpkg.com/feather-icons@4.22.1/dist/feather.min.js"></script>
     </head>
     <body>
@@ -64,6 +65,8 @@
                 </button>
             </div>
         </main>
+
+        <div class="snackbar snackbar--error" id="error"></div>
 
         <div class="modal" id="gameOver" aria-label="Game Over">
             <div class="modal__content">
@@ -156,6 +159,7 @@
 
         <script type="module">
             import Modal from "./script/modal.js";
+            import showSnackbar from "./script/snackbar.js";
             import {
                 setup,
                 setupCanvas,
@@ -170,7 +174,8 @@
                 errorAnimation
             } from "./script/helpers.js";
 
-            let highscores = new Modal("#highscores"),
+            let errorSnackbar = document.getElementById("error"),
+                highscores = new Modal("#highscores"),
                 highscoreList = document.getElementById("highscore-list"),
                 gameOver = new Modal("#gameOver"),
                 gameOverScore = document.getElementById("gameOverScore"),
@@ -227,6 +232,7 @@
                 canvas,
                 {},
                 {
+                    error: err => showSnackbar(errorSnackbar, err.message),
                     gameOver: score => {
                         let highscores =
                             JSON.parse(localStorage.getItem("highscores")) ||
