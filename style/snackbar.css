@@ -1,0 +1,54 @@
+.snackbar {
+    position: fixed;
+    top: 1em;
+    left: 50%;
+
+    width: 80%;
+    max-width: 600px;
+
+    display: flex;
+    transform: translateX(-50%);
+
+    visibility: hidden;
+
+    border-radius: 4px;
+    padding: 1em;
+    z-index: 10;
+}
+
+.snackbar .snackbar__icon {
+    display: inline-block;
+    align-self: center;
+    flex-shrink: 0;
+    margin-right: 1em;
+}
+
+.snackbar .snackbar__icon + .snackbar__content {
+    text-align: left;
+}
+
+.snackbar.show {
+    visibility: visible;
+    animation: zoomIn 0.25s;
+}
+
+.snackbar--error {
+    background-color: red;
+    color: white;
+}
+
+.snackbar--success {
+    background-color: #4caf50;
+    color: white;
+}
+
+.snackbar--info {
+    background-color: var(--main-color);
+    color: white;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: translate(-50%, -100%) scale(0.98);
+    }
+}
