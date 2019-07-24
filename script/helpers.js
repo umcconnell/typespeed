@@ -55,5 +55,5 @@ export function addHighscore(highscores, score) {
 
 export function errorAnimation(el, className = "error", time = 1000) {
     el.classList.add(className);
-    return setTimeout(() => el.classList.remove(className), time);
+    return wait(time).then(() => el.classList.remove(className));
 }
