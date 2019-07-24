@@ -14,6 +14,10 @@ export function sortBy(field, ascending = true) {
     };
 }
 
+export function wait(ms) {
+    return new Promise(res => setTimeout(res, ms));
+}
+
 export function formatDate(date) {
     const months = [
         "January",
