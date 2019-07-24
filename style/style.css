@@ -19,6 +19,18 @@ body {
     height: 100vh;
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
+body.modal-open main {
+    transform: scale(0.97);
+}
+
+main {
+    transition: transform 0.3s;
+}
+
 .visually-hidden {
     /* https://snook.ca/archives/html_and_css/hiding-content-for-accessibility */
     position: absolute !important;
