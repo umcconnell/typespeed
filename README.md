@@ -1,6 +1,6 @@
 # Typespeed
 
-Type as fast you can!
+Type as fast as you can!
 
 ## Table of Contents
 
